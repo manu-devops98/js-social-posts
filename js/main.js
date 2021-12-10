@@ -20,6 +20,7 @@ function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 
+
 // array dei post 
 const arrayPost = [
     {
@@ -95,3 +96,14 @@ function printPost(array,container) {
 }
 
 printPost(arrayPost, container);
+
+// creo variabile per bottone dei like e numero like
+const button = document.querySelector('.like-button');
+console.log(button);
+let sum = arrayPost.likes;
+const numLikes = document.getElementById('like-counter-1');
+
+
+button.addEventListener('click', function () {
+    button.style.color = 'green';
+});
