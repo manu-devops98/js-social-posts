@@ -44,15 +44,16 @@ const arrayPost = [
         profile: `https://picsum.photos/id/${getRndInteger(1,250)}/300/300`,
         date: '2 settimane fa',
         text: 'Placeat libero ipsa nobis ipsum quibusdam quas harum ut.  Distinctio minima.',
-        // image: 'https://picsum.photos/id//600/300',
         image: `https://picsum.photos/id/${getRndInteger(1,250)}/600/300`,
         likes: 200
     },
 ];
 
+
 // funzione per stampare i post in pagina 
 function printPost(array,container) {
     container.innerHTML = '';
+   
     // ciclo for per ciclare sugli oggetti 
     for (let i = 0; i < array.length; i++) {
         const obj = array[i];
@@ -63,7 +64,7 @@ function printPost(array,container) {
         <div class="post__header">
             <div class="post-meta">                    
                 <div class="post-meta__icon">
-                    <img class="profile-pic" src="${obj.profile}" alt="obj.name">                    
+                <img class="profile-pic" src="${obj.profile}" alt="Phil Mangione">            
                 </div>
                 <div class="post-meta__data">
                     <div class="post-meta__author">${obj.name}</div>
@@ -98,12 +99,30 @@ function printPost(array,container) {
 printPost(arrayPost, container);
 
 // creo variabile per bottone dei like e numero like
-const button = document.querySelector('.like-button');
-console.log(button);
-let sum = arrayPost.likes;
-const numLikes = document.getElementById('like-counter-1');
+const postFooter = document.querySelectorAll('.post__footer');
+
+for (let i = 0; i < postFooter.length; i++) {
+    const element = postFooter[i];
+    const likeButton = element.querySelector('.like-button');
+    const numLikes = element.querySelector('.js-likes-counter');
+    let likes = numLikes.innerText;
+
+    let clickButton = false;
+    likeButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        if (!(clickButton)) {
+            likeButton.style.color = 'green';
+            clickButton = true;
+            likes++;
+        } else {
+            likeButton.style.color = '#404040';
+            clickButton = false;
+            likes--;
+        }
+        numLikes.innerText = likes;
+    })
+
+    
+}
 
 
-button.addEventListener('click', function () {
-    button.style.color = 'green';
-});
